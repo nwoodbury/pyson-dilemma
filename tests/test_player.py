@@ -47,6 +47,45 @@ class TestPlayer(object):
         self.col = Player('Col')
 
     ###########################################################################
+    #   Round 0
+    ###########################################################################
+
+    def test_last_turn_0(self):
+        assert self.row.last_turn(self.history_0) == -1
+        assert self.col.last_turn(self.history_0) == -1
+
+    def test_this_turn_0(self):
+        assert self.row.this_turn(self.history_0) == 0
+        assert self.col.this_turn(self.history_0) == 0
+
+    def test_my_actions_turn_0(self):
+        assert self.row.my_actions(self.history_0) == []
+        assert self.col.my_actions(self.history_0) == []
+
+    def test_enemy_actions_turn_0(self):
+        assert self.row.enemy_actions(self.history_0) == []
+        assert self.col.enemy_actions(self.history_0) == []
+
+    def test_my_payoffs_turn_0(self):
+        assert self.row.my_payoffs(self.history_0) == []
+        assert self.col.my_payoffs(self.history_0) == []
+
+    def test_enemy_payoffs_turn_0(self):
+        assert self.row.enemy_payoffs(self.history_0) == []
+        assert self.col.enemy_payoffs(self.history_0) == []
+
+    def test_count_defects_turn_0(self):
+        assert self.row.count_defects(self.history_0, 1) == 0
+        assert self.row.count_defects(self.history_0, 2) == 0
+
+        assert self.col.count_defects(self.history_0, 1) == 0
+        assert self.col.count_defects(self.history_0, 2) == 0
+
+    def test_enemy_defected_last_turn_0(self):
+        assert self.row.enemy_defected_last(self.history_0) is False
+        assert self.col.enemy_defected_last(self.history_0) is False
+
+    ###########################################################################
     #   Round 1
     ###########################################################################
 

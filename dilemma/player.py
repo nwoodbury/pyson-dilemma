@@ -82,6 +82,7 @@ class Player:
 
     def last_turn(self, history):
         """Returns the index (k) of the last turn, as seen by `history`.
+        If this is the first turn, returns -1.
 
         Parameters
         ----------
@@ -93,6 +94,8 @@ class Player:
         k : int
             The index of the last turn in `history`.
         """
+        if history is None:
+            return -1
         return history.axes[0][-1]
 
     def this_turn(self, history):
@@ -125,6 +128,8 @@ class Player:
             The list of this player's actions, where actions[k] is the action
             performed at time k.
         """
+        if history is None:
+            return []
         return history['%sAction' % self.me].tolist()
 
     def enemy_actions(self, history):
@@ -142,6 +147,8 @@ class Player:
             The list of the other player's actions, where actions[k] is the
             action performed at time k.
         """
+        if history is None:
+            return []
         return history['%sAction' % self.enemy].tolist()
 
     def my_payoffs(self, history):
@@ -159,6 +166,8 @@ class Player:
             The list of this player's payoffs, where payoffs[k] is the
             discounted payoff at time k.
         """
+        if history is None:
+            return []
         return history['%sPayoff' % self.me].tolist()
 
     def enemy_payoffs(self, history):
@@ -176,6 +185,8 @@ class Player:
             The list of the other player's payoffs, where payoffs[k] is the
             discounted payoff at time k.
         """
+        if history is None:
+            return []
         return history['%sPayoff' % self.enemy].tolist()
 
     def count_defects(self, history, n):
@@ -196,6 +207,8 @@ class Player:
         defects : int (non-negative)
             The count of times the enemy has defected in the last n turns.
         """
+        if history is None:
+            return 0
         df = history.tail(n)
         df = df[df['%sAction' % self.enemy] == 'D']
         return len(df)
