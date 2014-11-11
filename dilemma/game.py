@@ -81,7 +81,6 @@ class Game:
                 df_history = pd.DataFrame(self.history).transpose()
             else:
                 df_history = None
-            print df_history
             row_a = self.row_player.get_action(df_history)
             col_a = self.col_player.get_action(df_history)
             assert row_a in ['C', 'D']
@@ -93,7 +92,10 @@ class Game:
                 'RowPayoff': uk[0],
                 'ColPayoff': uk[1]
             }
-        return pd.DataFrame(self.history).transpose()
+        df = pd.DataFrame(self.history).transpose()
+        # Sort columns
+        df = df[['RowAction', 'ColAction', 'RowPayoff', 'ColPayoff']]
+        return df
 
     def u(self, row_action, col_action):
         """Gets the payoffs to both players given the actions by each player.
