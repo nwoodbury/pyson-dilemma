@@ -11,7 +11,7 @@ class Game:
 
     The payoff to each player i at time k will be:
 
-        v_i(k) = (1 - r)^k * u_i(a_r(k), a_c(k)),
+        v_i(k) = r^k * u_i(a_r(k), a_c(k)),
 
     where r is `discount` and u_i(a_r(k), a_c(k)) is the utility to i at time k
     given the pair of actions played by each player at k. This is given by
@@ -52,7 +52,7 @@ class Game:
         self.discount = discount
         self.payoffs = payoffs
 
-    def get_payoffs(self, row_action, col_action):
+    def u(self, row_action, col_action):
         """Gets the payoffs to both players given the actions by each player.
 
         Parameters

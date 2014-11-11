@@ -9,3 +9,11 @@ Installation
 Install with:
 
     python setup.py develop --user
+
+
+Testing
+=======
+
+Test cases should be run before committing any changes. To run the test cases:
+
+    python setup.py test
