@@ -189,7 +189,7 @@ class Player:
             return []
         return history['%sPayoff' % self.enemy].tolist()
 
-    def count_defects(self, history, n):
+    def count_defects(self, history, n=None):
         """Returns the number of times the enemy has defected in the last n
         turns.
 
@@ -200,7 +200,8 @@ class Player:
         n : int (positive)
             The number of turns in the past to look for defects. If n is less
             than the number of rounds seen in the game m, then will only look
-            at the last m rounds.
+            at the last m rounds. If n is None, then counts the defects in
+            all m rounds of the history.
 
         Returns
         -------
@@ -209,6 +210,8 @@ class Player:
         """
         if history is None:
             return 0
+        if n is None:
+            n = len(history)
         df = history.tail(n)
         df = df[df['%sAction' % self.enemy] == 'D']
         return len(df)

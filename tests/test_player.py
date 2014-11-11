@@ -75,9 +75,11 @@ class TestPlayer(object):
         assert self.col.enemy_payoffs(self.history_0) == []
 
     def test_count_defects_turn_0(self):
+        assert self.row.count_defects(self.history_0) == 0
         assert self.row.count_defects(self.history_0, 1) == 0
         assert self.row.count_defects(self.history_0, 2) == 0
 
+        assert self.col.count_defects(self.history_0) == 0
         assert self.col.count_defects(self.history_0, 1) == 0
         assert self.col.count_defects(self.history_0, 2) == 0
 
@@ -114,9 +116,11 @@ class TestPlayer(object):
         assert self.col.enemy_payoffs(self.history_1) == [3]
 
     def test_count_defects_turn_1(self):
+        assert self.row.count_defects(self.history_1) == 0
         assert self.row.count_defects(self.history_1, 1) == 0
         assert self.row.count_defects(self.history_1, 2) == 0
 
+        assert self.col.count_defects(self.history_1) == 0
         assert self.col.count_defects(self.history_1, 1) == 0
         assert self.col.count_defects(self.history_1, 2) == 0
 
@@ -153,10 +157,12 @@ class TestPlayer(object):
         assert self.col.enemy_payoffs(self.history_2) == [3, 0]
 
     def test_count_defects_turn_2(self):
+        assert self.row.count_defects(self.history_2) == 1
         assert self.row.count_defects(self.history_2, 1) == 1
         assert self.row.count_defects(self.history_2, 2) == 1
         assert self.row.count_defects(self.history_2, 3) == 1
 
+        assert self.col.count_defects(self.history_2) == 0
         assert self.col.count_defects(self.history_2, 1) == 0
         assert self.col.count_defects(self.history_2, 2) == 0
         assert self.col.count_defects(self.history_2, 3) == 0
@@ -195,11 +201,13 @@ class TestPlayer(object):
         assert self.col.enemy_payoffs(self.history_3) == [3, 0, 0]
 
     def test_count_defects_turn_3(self):
+        assert self.row.count_defects(self.history_3) == 2
         assert self.row.count_defects(self.history_3, 1) == 1
         assert self.row.count_defects(self.history_3, 2) == 2
         assert self.row.count_defects(self.history_3, 3) == 2
         assert self.row.count_defects(self.history_3, 4) == 2
 
+        assert self.col.count_defects(self.history_3) == 0
         assert self.col.count_defects(self.history_3, 1) == 0
         assert self.col.count_defects(self.history_3, 2) == 0
         assert self.col.count_defects(self.history_3, 3) == 0
@@ -241,12 +249,14 @@ class TestPlayer(object):
             [3, 0, 0, 5 * .9 ** 3]
 
     def test_count_defects_turn_4(self):
+        assert self.row.count_defects(self.history_4) == 2
         assert self.row.count_defects(self.history_4, 1) == 0
         assert self.row.count_defects(self.history_4, 2) == 1
         assert self.row.count_defects(self.history_4, 3) == 2
         assert self.row.count_defects(self.history_4, 4) == 2
         assert self.row.count_defects(self.history_4, 5) == 2
 
+        assert self.col.count_defects(self.history_4) == 1
         assert self.col.count_defects(self.history_4, 1) == 1
         assert self.col.count_defects(self.history_4, 2) == 1
         assert self.col.count_defects(self.history_4, 3) == 1
