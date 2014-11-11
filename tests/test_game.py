@@ -1,4 +1,5 @@
-from dilemma.tournament import Game
+from dilemma.game import Game
+from dilemma.player_ac import AlwaysCooperatePlayer
 
 
 class TestGameStatic(object):
@@ -11,7 +12,8 @@ class TestGameStatic(object):
             'C': {'C': (3, 3), 'D': (0, 5)},
             'D': {'C': (5, 0), 'D': (1, 1)}
         }
-        self.game = Game(None, None, 10, 0.9, payoffs)
+        self.game = Game(AlwaysCooperatePlayer, AlwaysCooperatePlayer, 10, 0.9,
+                         payoffs)
 
     def test_payoffs_cc(self):
         assert self.game.u('C', 'C') == (3, 3)

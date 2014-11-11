@@ -24,10 +24,10 @@ class Game:
 
     Parameters
     ----------
-    row_player : Player
-        The row player in the game.
-    col_player : Player
-        The column player in the game.
+    row_player : Player class
+        The class (uninitialized) that defines the row player in the game.
+    col_player : Player class
+        The class (uninitialized) that defines the column player in the game.
     rounds : int
         The number of rounds for which the game will last. For the tournament,
         this should be some large random number. For testing, this can be
@@ -48,8 +48,8 @@ class Game:
 
     def __init__(self, row_player, col_player, rounds, discount,
                  payoffs=PAYOFFS):
-        self.row_player = row_player
-        self.col_player = col_player
+        self.row_player = row_player('Row')
+        self.col_player = col_player('Col')
         self.rounds = rounds
         self.discount = discount
         self.payoffs = payoffs
@@ -59,7 +59,7 @@ class Game:
     def run(self):
         for k in range(self.rounds):
             if k > 0:
-                df_history = pd.DataFrame(self.history)
+                df_history = pd.DataFrame(self.history).transpose()
             else:
                 df_history = None
             print df_history
@@ -74,7 +74,7 @@ class Game:
                 'RowPayoff': uk[0],
                 'ColPayoff': uk[1]
             }
-        return pd.DataFrame(self.history)
+        return pd.DataFrame(self.history).transpose()
 
     def u(self, row_action, col_action):
         """Gets the payoffs to both players given the actions by each player.
