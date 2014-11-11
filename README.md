@@ -4,7 +4,7 @@ pyson-dilemma
 BYU CS 670 Repeated Play Prisoner's Dilemma Lab.
 
 Installation
-============
+------------
 
 Install with:
 
@@ -12,7 +12,7 @@ Install with:
 
 
 Testing
-=======
+-------
 
 Test cases should be run before committing any changes. To run the test cases:
 
