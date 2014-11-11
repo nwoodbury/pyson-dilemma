@@ -69,3 +69,30 @@ class Game:
             the second entry is the payoff to the column player.
         """
         return self.payoffs[row_action][col_action]
+
+    def uk(self, row_action, col_action, k, round_to=6):
+        """Gets the payoffs to both players at time k, given the actions by
+        each player.
+
+        Parameters
+        ----------
+        row_action : str in {'C', 'D'}
+            The action performed by the row player.
+        col_action : str in {'C', 'D'}
+            The action performed by the column player.
+        k : int (non-negative)
+            The time at which to discount the payoffs. The first time is 0.
+        round_to : int
+            The number of decimal places at which to round the solution.
+            Defaults to 6.
+
+        Returns
+        -------
+        payoffs : tuple (size 2) of numbers
+            The first entry in the tuple is the payoff to the row player, and
+            the second entry is the payoff to the column player. These payoffs
+            are discounted.
+        """
+        u = self.u(row_action, col_action)
+        return (round(u[0] * self.discount ** k, round_to),
+                round(u[1] * self.discount ** k, round_to))

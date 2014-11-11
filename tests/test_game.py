@@ -24,3 +24,15 @@ class TestGameStatic(object):
 
     def test_payoffs_dd(self):
         assert self.game.u('D', 'D') == (1, 1)
+
+    def test_discount_cd_0(self):
+        assert self.game.uk('C', 'D', 0) == (0, 5)
+
+    def test_discount_dc_1(self):
+        assert self.game.uk('D', 'C', 1) == (4.5, 0)
+
+    def test_discount_cc_2(self):
+        assert self.game.uk('C', 'C', 2) == (2.43, 2.43)
+
+    def test_discount_dd_3(self):
+        assert self.game.uk('D', 'D', 3) == (0.729, 0.729)
