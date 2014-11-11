@@ -32,6 +32,17 @@ class Game:
         The number of rounds for which the game will last. For the tournament,
         this should be some large random number. For testing, this can be
         smaller and deterministic.
+
+        If `discount` is 0.9, and the rounding factor in payoff is 6 (default),
+        then 153 rounds must pass before the discount factor for the largest
+        payoff leads to payoffs rounded to 0. To compute this, choose n such
+        that:
+
+            5(0.9)^n < 0.0000005,
+            n > ln(0.0000005 / 5) / ln(0.9) = 152.98
+
+        Thus a good way to choose rounds may be a random number between 160
+        and 320, this way, no agent can guess at the last round.
     discount : number [0, 1]
         The discount factor r.
     payoffs : dictionary of dictionaries
@@ -57,6 +68,14 @@ class Game:
         self.history = {}
 
     def run(self):
+        """Runs the game as specified in the constructor.
+
+        Returns
+        -------
+        history : pandas.DataFrame
+            The history of the game. See Player.get_action() in player.py for
+            a full specification of history.
+        """
         for k in range(self.rounds):
             if k > 0:
                 df_history = pd.DataFrame(self.history).transpose()

@@ -38,3 +38,22 @@ class TestGameStatic(object):
 
     def test_discount_dd_3(self):
         assert self.game.uk('D', 'D', 3) == (0.729, 0.729)
+
+    def test_run(self):
+        history = self.game.run()
+        assert len(history) == 10
+
+        assert history['RowAction'].iloc[0] == 'C'
+        assert history['ColAction'].iloc[0] == 'C'
+        assert history['RowPayoff'].iloc[0] == 3
+        assert history['ColPayoff'].iloc[0] == 3
+
+        assert history['RowAction'].iloc[1] == 'C'
+        assert history['ColAction'].iloc[1] == 'C'
+        assert history['RowPayoff'].iloc[1] == 3 * 0.9
+        assert history['ColPayoff'].iloc[1] == 3 * 0.9
+
+        assert history['RowAction'].iloc[2] == 'C'
+        assert history['ColAction'].iloc[2] == 'C'
+        assert history['RowPayoff'].iloc[2] == 3 * 0.9 * 0.9
+        assert history['ColPayoff'].iloc[2] == 3 * 0.9 * 0.9
