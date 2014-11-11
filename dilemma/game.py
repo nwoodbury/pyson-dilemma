@@ -1,3 +1,5 @@
+import pandas as pd
+
 # Outer dict is row action, inner is col action.
 # Payoffs in form (row, col)
 PAYOFFS = {
@@ -51,6 +53,28 @@ class Game:
         self.rounds = rounds
         self.discount = discount
         self.payoffs = payoffs
+
+        self.history = {}
+
+    def run(self):
+        for k in range(self.rounds):
+            if k > 0:
+                df_history = pd.DataFrame(self.history)
+            else:
+                df_history = None
+            print df_history
+            row_a = self.row_player.get_action(df_history)
+            col_a = self.col_player.get_action(df_history)
+            assert row_a in ['C', 'D']
+            assert col_a in ['C', 'D']
+            uk = self.uk(row_a, col_a, k)
+            self.history[k] = {
+                'RowAction': row_a,
+                'ColAction': col_a,
+                'RowPayoff': uk[0],
+                'ColPayoff': uk[1]
+            }
+        return pd.DataFrame(self.history)
 
     def u(self, row_action, col_action):
         """Gets the payoffs to both players given the actions by each player.
