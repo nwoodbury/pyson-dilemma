@@ -1,11 +1,13 @@
 from dilemma.tournament import Tournament
 
 from dilemma.player_ac import AlwaysCooperatePlayer
+from dilemma.player_ad import AlwaysDefectPlayer
 
 
 if __name__ == '__main__':
     agents = {
-        'Always Cooperate': AlwaysCooperatePlayer
+        'Always Cooperate': AlwaysCooperatePlayer,
+        'Always Defect': AlwaysDefectPlayer
     }
     tournament = Tournament(agents)
     row, col = tournament.run()
