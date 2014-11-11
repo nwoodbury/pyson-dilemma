@@ -73,7 +73,7 @@ class Tournament:
 
                 count += 1
                 if progress:
-                    print '\t%.2f%% Complete' % (count / float(total))
+                    print '\t%.2f%% Complete' % (count * 100 / float(total))
 
         if progress:
             print '\tDone.'
