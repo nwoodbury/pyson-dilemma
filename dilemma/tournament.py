@@ -56,8 +56,8 @@ class Tournament:
             os.makedirs('histories/')
 
         if progress:
-            print '-------------------'
-            print 'Running Tournament:'
+            print('-------------------')
+            print('Running Tournament:')
         for row_name, row_class in self.agents.iteritems():
             self.row[row_name] = {}
             self.col[row_name] = {}
@@ -73,11 +73,11 @@ class Tournament:
 
                 count += 1
                 if progress:
-                    print '\t%.2f%% Complete' % (count * 100 / float(total))
+                    print('\t%.2f%% Complete' % (count * 100 / float(total)))
 
         if progress:
-            print '\tDone.'
-            print '-------------------'
+            print('\tDone.')
+            print('-------------------')
 
         row = pd.DataFrame(self.row).transpose()
         col = pd.DataFrame(self.col).transpose()
