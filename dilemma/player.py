@@ -45,7 +45,7 @@ class Player:
 
         Parameters
         ----------
-        history : pandas.DataFrame
+        history : pandas.DataFrame or None
             The dataframe that contains the history of the game up to the
             present. Rows are sorted in order of time, and indexed by k. The
             columns, for each row indexed by time k, are as follows:
@@ -61,6 +61,9 @@ class Player:
 
                 * `ColPayoff`: The discounted payoff to the column player at
                   time k.
+
+            If None is given instead of the history, then this is the first
+            turn (None will always be given on the first turn).
 
             The utility functions defined at the end of this class will
             be helpful for extracting useful information from the history
@@ -197,7 +200,7 @@ class Player:
         df = df[df['%sAction' % self.enemy] == 'D']
         return len(df)
 
-    def defected_last(self, history):
+    def enemy_defected_last(self, history):
         """Returns whether the enemy defected last turn.
 
         Parameters
