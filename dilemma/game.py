@@ -3,8 +3,8 @@ import pandas as pd
 # Outer dict is row action, inner is col action.
 # Payoffs in form (row, col)
 PAYOFFS = {
-    'C': {'C': (3, 3), 'D': (0, 5)},
-    'D': {'C': (5, 0), 'D': (1, 1)}
+    'C': {'C': (3, 3), 'D': (1, 5)},
+    'D': {'C': (5, 1), 'D': (2, 2)}
 }
 
 

@@ -1,5 +1,6 @@
 from dilemma.player import Player
 
+
 class NeverForgivePlayer(Player):
 
     def __init__(self, me):

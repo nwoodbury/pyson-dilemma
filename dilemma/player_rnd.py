@@ -1,5 +1,6 @@
 from dilemma.player import Player
-import random.py
+import random
+
 
 class RandomPlayer(Player):
 

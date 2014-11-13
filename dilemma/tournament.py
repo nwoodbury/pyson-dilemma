@@ -47,6 +47,7 @@ class Tournament:
         # see documentation of the game constructor for motivation of this
         # choice of rounds.
         rounds = random.randint(160, 320)
+        #rounds = 5
         discount = 0.9
 
         total = len(self.agents) ** 2
@@ -58,10 +59,10 @@ class Tournament:
         if progress:
             print('-------------------')
             print('Running Tournament:')
-        for row_name, row_class in self.agents.iteritems():
+        for row_name, row_class in self.agents.items():
             self.row[row_name] = {}
             self.col[row_name] = {}
-            for col_name, col_class in self.agents.iteritems():
+            for col_name, col_class in self.agents.items():
                 game = Game(row_class, col_class, rounds, discount)
                 history = game.run()
                 row_payoffs = history['RowPayoff'].sum()
@@ -104,5 +105,5 @@ class Tournament:
         df = df.transpose()
         df['Totals'] = df.sum(axis=1)
         df = df.transpose()
-        df['Totals']['Totals'] = None  # Don't total the totals
+        #df['Totals']['Totals'] = None  # Don't total the totals
         return df
