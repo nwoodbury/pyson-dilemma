@@ -14,6 +14,44 @@ from dilemma.player_tfrt import TitForRandomTatsPlayer
 from dilemma.player_switch import SwitchPlayer
 
 
+discounts = [0.75, 0.9, 0.99]
+trials = 10
+
+
+def run_instance(agents, trial_no, discount):
+    print('')
+    print('====================================================')
+    print('Trial #%i, discout=%.2f' % (trial_no, discount))
+    print('====================================================')
+
+    tournament = Tournament(agents)
+    row, col = tournament.run(discount=discount)
+
+    print('')
+    print('-------------------')
+    print('Row Payoffs')
+    print('-------------------')
+    print(row)
+    row_name = 'row_%i_%i.csv' % (trial_no, int(discount * 100))
+    row.to_csv(row_name)
+    print('(saved to %s)' % row_name)
+
+    print('')
+    print('-------------------')
+    print('Col Payoffs')
+    print('-------------------')
+    print(col)
+    col_name = 'col_%i_%i.csv' % (trial_no, int(discount * 100))
+    col.to_csv(col_name)
+    print('(saved to %s)' % col_name)
+
+
+def run_trial(agents):
+    for trial in range(trials):
+        for discount in discounts:
+            run_instance(agents, trial, discount)
+
+
 if __name__ == '__main__':
     agents = {
         'Always Cooperate': AlwaysCooperatePlayer,
@@ -29,21 +67,4 @@ if __name__ == '__main__':
         'Tit-for-Random-Tats': TitForRandomTatsPlayer,
         'Switch': SwitchPlayer
     }
-    tournament = Tournament(agents)
-    row, col = tournament.run()
-
-    print('')
-    print('-------------------')
-    print('Row Payoffs')
-    print('-------------------')
-    print(row)
-    row.to_csv('row.csv')
-    print('(saved to row.csv)')
-
-    print('')
-    print('-------------------')
-    print('Col Payoffs')
-    print('-------------------')
-    print(col)
-    col.to_csv('col.csv')
-    print('(saved to col.csv)')
+    run_trial(agents)

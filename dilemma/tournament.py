@@ -1,6 +1,8 @@
 import os
 import random
 import pandas as pd
+import math
+from sys import stdout
 
 from dilemma.game import Game
 
@@ -21,11 +23,15 @@ class Tournament:
         self.col = {}
         self.agents = agents
 
-    def run(self, progress=True):
+    def run(self, discount=0.9, rounds=None, progress=True):
         """Runs the tournament.
 
         Parameters
         ----------
+        discount : number [0, 1]
+            The discount factor
+        rounds : int or None
+            The number of rounds to play. If None, sets this randomly.
         progress : boolean
             True if progress messages should be printed to the command line,
             false otherwise.
@@ -46,8 +52,13 @@ class Tournament:
 
         # see documentation of the game constructor for motivation of this
         # choice of rounds.
-        rounds = random.randint(160, 320)
-        #rounds = 5
+        if discount == 0 and rounds is None:
+            raise Exception('Must explicitely set number of rounds if ' +
+                            'discount factor is 0.')
+        n = int(math.log(0.0000005 / 5) / math.log(discount))
+        if progress:
+            print('Running %i rounds' % n)
+        rounds = random.randint(n, 2 * n)
         discount = 0.9
 
         total = len(self.agents) ** 2
@@ -57,8 +68,7 @@ class Tournament:
             os.makedirs('histories/')
 
         if progress:
-            print('-------------------')
-            print('Running Tournament:')
+            stdout.write('Running Tournament:')
         for row_name, row_class in self.agents.items():
             self.row[row_name] = {}
             self.col[row_name] = {}
@@ -74,11 +84,11 @@ class Tournament:
 
                 count += 1
                 if progress:
-                    print('\t%.2f%% Complete' % (count * 100 / float(total)))
+                    stdout.write('\rRunning Tournament: %.2f%% Complete' %
+                                 (count * 100 / float(total)))
 
         if progress:
-            print('\tDone.')
-            print('-------------------')
+            stdout.write('\tDone.\n')
 
         row = pd.DataFrame(self.row).transpose()
         col = pd.DataFrame(self.col).transpose()
@@ -105,5 +115,5 @@ class Tournament:
         df = df.transpose()
         df['Totals'] = df.sum(axis=1)
         df = df.transpose()
-        #df['Totals']['Totals'] = None  # Don't total the totals
+        # df['Totals']['Totals'] = None  # Don't total the totals
         return df
