@@ -13,7 +13,7 @@ if __name__ == '__main__':
             lst[i] = pd.read_csv(fl, index_col=0)
             i += 1
 
-        all_games = pd.Panel(lst).transpose(1, 0, 2)
+        all_games = pd.Panel(lst).transpose(2, 0, 1)
         means = all_games.mean().applymap(lambda x: round(x, 1))
         stds = all_games.std().applymap(lambda x: round(x, 1))
 
