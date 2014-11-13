@@ -21,11 +21,11 @@ trials = 10
 def run_instance(agents, trial_no, discount):
     print('')
     print('====================================================')
-    print('Trial #%i, discout=%.2f' % (trial_no, discount))
+    print('Trial #%i, p=%.2f' % (trial_no, discount))
     print('====================================================')
 
     tournament = Tournament(agents)
-    row, col = tournament.run(discount=discount)
+    row, col = tournament.run(p=discount)
 
     print('')
     print('-------------------')
