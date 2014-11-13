@@ -10,6 +10,8 @@ from dilemma.player_tf2t import TitFor2TatsPlayer
 from dilemma.player_wsls import WinStayLoseShiftPlayer
 from dilemma.player_ccd import CCDPlayer
 from dilemma.player_omni import OmniPlayer
+from dilemma.player_tfrt import TitForRandomTatsPlayer
+from dilemma.player_switch import SwitchPlayer
 
 
 if __name__ == '__main__':
@@ -23,7 +25,9 @@ if __name__ == '__main__':
         'Tit-for-2-Tats': TitFor2TatsPlayer,
         'Win-Stay-Lose-Shift': WinStayLoseShiftPlayer,
         'CCD': CCDPlayer,
-        'Omni': OmniPlayer
+        'Omni': OmniPlayer,
+        'Tit-for-Random-Tats': TitForRandomTatsPlayer,
+        'Switch': SwitchPlayer
     }
     tournament = Tournament(agents)
     row, col = tournament.run()
